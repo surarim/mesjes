@@ -1,18 +1,17 @@
-head = 'mesjes'
-def application(environ, start_response):
-    if environ.get('PATH_INFO') == '/':
-        status = '200 OK'
-        content = head
-    elif environ.get('PATH_INFO') == '/read':
-        status = '200 OK'
-        content = open('/var/www/messages','r').read()
-    elif environ.get('PATH_INFO') == '/add':
-        status = '200 OK'
-        open('/var/www/messages','a').write(environ.get('QUERY_STRING')+'\n')
-        content = 'add OK'
+def application(env, start_response):
+    scripts = open('/var/www/scripts.js', 'r').read()
+    forms = open('/var/www/forms.html', 'r').read()
+    if env['REQUEST_METHOD'] == 'POST':
+        if env.get('CONTENT_LENGTH'): env_len = int(env.get('CONTENT_LENGTH'))
+        else: env_len = 0
+        if env_len > 0: post = env['wsgi.input'].read(env_len).decode('utf-8')
+        else: post = ""
+        mes = ""
+        if env['PATH_INFO'] == "/read": mes = open('/var/www/messages','r').read()
+        if env['PATH_INFO'] == "/add": mes = open('/var/www/messages','a').write(post+'\n')
+        html = mes
     else:
-        status = '200 OK'
-        content = head
-    response_headers = [('Content-Type', 'text/html'), ('Content-Length', str(len(content)))]
-    start_response(status, response_headers)
-    yield content.encode('utf8')
+        html = '<html><head>' + scripts + '</head><body>' + forms + '</body></html>'
+    start_response('200 OK', [('Content-Type', 'text/html'), ('Content-Length', str(len(html)))])
+    yield html.encode('utf-8')
+    
