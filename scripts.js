@@ -32,7 +32,4 @@ function message_send(event)
         };
     };
 
-// Функция загрузки
-//window.onload = function() { message_read() };
-
 </script>
