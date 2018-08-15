@@ -1,4 +1,5 @@
 root_folder = '/var/www/'
+charset = '<meta charset="utf-8">'
 def application(env, start_response):
     scripts = open(root_folder+'scripts.js', 'r').read()
     forms = open(root_folder+'forms.html', 'r').read()
@@ -18,7 +19,7 @@ def application(env, start_response):
             start_response('200 OK', [('Content-Type','image/png'),('Content-Length', str(len(favicon)))])
             yield favicon
         else:
-            html = '<html>\n<head>\n' + scripts + '\n</head>\n<body>\n' + forms + '\n</body>\n</html>'
+            html = '<html>\n<head>\n' + charset + '\n' + scripts + '\n</head>\n<body>\n' + forms + '\n</body>\n</html>'
             start_response('200 OK', [('Content-Type', 'text/html'), ('Content-Length', str(len(html)))])
             yield html.encode('utf-8')
             
