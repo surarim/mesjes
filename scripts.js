@@ -16,6 +16,7 @@ message_read = setTimeout(function tick()
             }
         }
     req.send();
+    document.getElementById('fullchat').scrollTop =  document.getElementById('fullchat').scrollHeight;
     message_read = setTimeout(tick, 1000);
     }, 1000);
 
