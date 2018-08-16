@@ -24,11 +24,31 @@ function message_send(event)
     {
     if (event.keyCode == 13)
         {
+        username = document.getElementById("username").value;
         message_text = document.getElementById("message").value;
         document.getElementById("message").value = "";
         var req = new XMLHttpRequest();
         req.open('POST', '/add', true);
-        req.send(message_text+"<br>");
+        req.send("<b>"+username+":</b> "+message_text+"<br>");
+        };
+    };
+
+// Функция очистки чата
+function clear_chat(event)
+    {
+    username = document.getElementById("username").value;
+    var req = new XMLHttpRequest();
+    req.open('POST', '/clear', true);
+    req.send(username);
+    };
+
+// Функция изменения имени пользователя
+function username_change(event)
+    {
+    if (event.keyCode == 13)
+        {
+        message_text = document.getElementById("username").value;
+        document.getElementById("username").value = "";
         };
     };
 
