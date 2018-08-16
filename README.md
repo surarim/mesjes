@@ -1,7 +1,7 @@
 ![Alt text](mesjes.png?raw=true "Title")
 # mesjes
 ### Server Messages Dispatcher
-### Version 0.01 (early development)
+### Version 0.02 (early development)
 <hr>
 Client on JavaScript and http server on python
 <br>
