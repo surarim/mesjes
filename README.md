@@ -3,7 +3,7 @@
 ### Server Messages Dispatcher
 ### Version 0.1 (early development)
 <hr>
-Client on JavaScript and http server on python
+The client part consists of a web page on html + javascript (forms.html + scripts.js), and the server part is based on the python file mespool.py running on uwsgi.
 <br>
 The mesjes assembled on the following components:
 <ul>
