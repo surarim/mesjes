@@ -11,6 +11,7 @@ def application(env, start_response):
         result = ""
         if env['PATH_INFO'] == "/read": result = open(root_folder+'messages','r').read()
         if env['PATH_INFO'] == "/add": result = open(root_folder+'messages','a').write(post+'\n')
+        if env['PATH_INFO'] == "/clear": result = open(root_folder+'messages','w').write('Welcome to chat<br>\n')
         start_response('200 OK', [('Content-Type', 'text/html'), ('Content-Length', str(len(result)))])
         yield result.encode('utf-8')
     else:
@@ -22,4 +23,3 @@ def application(env, start_response):
             html = '<html>\n<head>\n' + charset + '\n' + scripts + '\n</head>\n<body>\n' + forms + '\n</body>\n</html>'
             start_response('200 OK', [('Content-Type', 'text/html'), ('Content-Length', str(len(html)))])
             yield html.encode('utf-8')
-            
